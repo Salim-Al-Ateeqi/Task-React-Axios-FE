@@ -64,7 +64,16 @@ function App() {
   };
 
   const deleteRoom = (id) => {
-    // to do : call BE to delete a room
+    try {
+      const response = await axios.post(
+        "https://coded-task-axios-be.herokuapp.com/rooms",
+        newRoom
+      );
+      setRooms([...rooms, response.data]);
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
+    }
   };
 
   return (
