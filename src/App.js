@@ -6,6 +6,7 @@ import ChatRoomsList from "./components/ChatRoomsList";
 import { Route, Switch } from "react-router";
 import axios from "axios";
 import { useEffect } from "react";
+import CreateRoomModal from "./components/CreateRoomModal";
 
 // Endpoints:
 // Fetch all rooms:
@@ -41,7 +42,7 @@ function App() {
       );
       setRooms(response.data);
     } catch (error) {
-      Window.alert(error);
+      window.alert(error);
     }
   };
 
@@ -49,8 +50,17 @@ function App() {
     fetchRooms();
   });
 
-  const createRoom = (newRoom) => {
-    // to do : call BE to create a room
+  const createRoom = async (newRoom) => {
+    try {
+      const response = await axios.post(
+        "https://coded-task-axios-be.herokuapp.com/rooms",
+        newRoom
+      );
+      setRooms([...rooms, response.data]);
+    } catch (error) {
+      console.log(error);
+      window.alert(error);
+    }
   };
 
   const deleteRoom = (id) => {
@@ -66,7 +76,7 @@ function App() {
           </Route>
           <Route exact path="/">
             <center>
-              <ChatRoomsList rooms={rooms} />
+              <ChatRoomsList rooms={rooms} createRoom={createRoom} />
             </center>
           </Route>
         </Switch>
