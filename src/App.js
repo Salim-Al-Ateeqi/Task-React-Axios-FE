@@ -7,6 +7,7 @@ import { Route, Switch } from "react-router";
 import axios from "axios";
 import { useEffect } from "react";
 import CreateRoomModal from "./components/CreateRoomModal";
+import ChatRoomitem from "./components/ChatRoomitem";
 
 // Endpoints:
 // Fetch all rooms:
@@ -58,20 +59,29 @@ function App() {
       );
       setRooms([...rooms, response.data]);
     } catch (error) {
-      console.log(error);
       window.alert(error);
     }
   };
 
-  const deleteRoom = (id) => {
+  const deleteRoom = async (id) => {
     try {
-      const response = await axios.post(
-        "https://coded-task-axios-be.herokuapp.com/rooms",
-        newRoom
+      const response = await axios.delete(
+        `https://coded-task-axios-be.herokuapp.com/rooms/${id}`
       );
-      setRooms([...rooms, response.data]);
+      let tempRoom = rooms.filter((room) => room.id !== id);
+      setRooms(tempRoom);
     } catch (error) {
-      console.log(error);
+      window.alert(error);
+    }
+  };
+
+  const updateRoom = async (roomId, data) => {
+    try {
+      const response = await axios.put(
+        `https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`,
+        data
+      );
+    } catch (error) {
       window.alert(error);
     }
   };
@@ -85,7 +95,12 @@ function App() {
           </Route>
           <Route exact path="/">
             <center>
-              <ChatRoomsList rooms={rooms} createRoom={createRoom} />
+              <ChatRoomsList
+                rooms={rooms}
+                createRoom={createRoom}
+                deleteRoom={deleteRoom}
+                updateRoom={updateRoom}
+              />
             </center>
           </Route>
         </Switch>
