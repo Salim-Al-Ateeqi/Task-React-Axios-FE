@@ -84,6 +84,11 @@ function App() {
         `https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`,
         data
       );
+      let updatedRooms = rooms.map((room) =>
+        room.id === roomId ? response.data : room
+      );
+
+      setRooms(updatedRooms);
     } catch (error) {
       window.alert(error);
     }
@@ -95,6 +100,7 @@ function App() {
         `https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}`,
         msg
       );
+      fetchRooms();
     } catch (error) {
       window.alert(error);
     }

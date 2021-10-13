@@ -14,7 +14,7 @@ function ChatRoom(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.createMsg(msg);
+    props.createMsg(room.id, msg);
   };
 
   return (
