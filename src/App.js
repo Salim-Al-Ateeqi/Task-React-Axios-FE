@@ -6,8 +6,6 @@ import ChatRoomsList from "./components/ChatRoomsList";
 import { Route, Switch } from "react-router";
 import axios from "axios";
 import { useEffect } from "react";
-import CreateRoomModal from "./components/CreateRoomModal";
-import ChatRoomitem from "./components/ChatRoomitem";
 
 // Endpoints:
 // Fetch all rooms:
