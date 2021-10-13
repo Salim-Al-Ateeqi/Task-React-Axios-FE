@@ -245,11 +245,11 @@ a {
 .main__chatcontent {
   flex-grow: 1;
   max-width: 100%;
-  border-right: 1px solid #ebe7fb;
+  border-right: 1px;
 }
 .content__header {
   padding-bottom: 15px;
-  border-bottom: 1px solid #ebe7fb;
+  border-bottom: 1px;
 }
 .current-chatting-user {
   display: flex;
