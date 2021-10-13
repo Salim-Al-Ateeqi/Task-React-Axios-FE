@@ -41,6 +41,7 @@ function App() {
       const response = await axios.get(
         "https://coded-task-axios-be.herokuapp.com/rooms"
       );
+      console.log(response.data);
       setRooms(response.data);
     } catch (error) {
       window.alert(error);
@@ -49,7 +50,7 @@ function App() {
 
   useEffect(() => {
     fetchRooms();
-  });
+  }, []);
 
   const createRoom = async (newRoom) => {
     try {
@@ -64,6 +65,8 @@ function App() {
   };
 
   const deleteRoom = async (id) => {
+    console.log("roomId", id);
+    console.log(`https://coded-task-axios-be.herokuapp.com/rooms/${id}`);
     try {
       const response = await axios.delete(
         `https://coded-task-axios-be.herokuapp.com/rooms/${id}`
@@ -86,12 +89,23 @@ function App() {
     }
   };
 
+  const createMsg = async (roomId, msg) => {
+    try {
+      const response = await axios.post(
+        `https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}`,
+        msg
+      );
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+
   return (
     <div className="__main">
       <div className="main__chatbody">
         <Switch>
           <Route path="/room/:roomSlug">
-            <ChatRoom rooms={rooms} />
+            <ChatRoom rooms={rooms} createMsg={createMsg} />
           </Route>
           <Route exact path="/">
             <center>

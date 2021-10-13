@@ -6,7 +6,7 @@ import UpdateRoomModal from "./UpdateRoomModal";
 export default function ChatRoomitem(props) {
   const room = props.room;
   const [isOpen, setIsOpen] = useState(false);
-
+  console.log("room", room);
   const closeModal = () => setIsOpen(false);
 
   const openModal = () => setIsOpen(true);
