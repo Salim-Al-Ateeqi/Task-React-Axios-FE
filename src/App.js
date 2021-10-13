@@ -39,7 +39,6 @@ function App() {
       const response = await axios.get(
         "https://coded-task-axios-be.herokuapp.com/rooms"
       );
-      console.log(response.data);
       setRooms(response.data);
     } catch (error) {
       window.alert(error);
@@ -63,8 +62,6 @@ function App() {
   };
 
   const deleteRoom = async (id) => {
-    console.log("roomId", id);
-    console.log(`https://coded-task-axios-be.herokuapp.com/rooms/${id}`);
     try {
       const response = await axios.delete(
         `https://coded-task-axios-be.herokuapp.com/rooms/${id}`
